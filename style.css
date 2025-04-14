@@ -1,37 +1,108 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
-    margin: 0;
-    padding: 0;
+  height: 100vh;
+  background: linear-gradient(120deg, #ffe6e6, #ffd6d6);
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 h1 {
-    color: #4CAF50;
-    text-align: center;
-    margin-top: 20px;
+  color: #c70039;
+  font-size: 3rem;
+  z-index: 2;
+  text-shadow: 1px 1px 2px #00000040;
+  animation: pulse 2s infinite;
 }
 
-h2 {
-    color: #555;
-    text-align: center;
-    margin-top: 10px;
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }
 
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 0;
-    text-align: center;
-    font-size: 1.5em;
+.heart {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: red;
+  transform: rotate(45deg);
+  animation: floatUp 6s linear infinite;
+  opacity: 0.7;
 }
 
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+.heart::before,
+.heart::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: red;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -10px;
+  left: 0;
+}
+
+.heart::after {
+  left: -10px;
+  top: 0;
+}
+
+@keyframes floatUp {
+  0% {
+    bottom: -10%;
+    opacity: 0.7;
+  }
+  100% {
+    bottom: 110%;
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem; 
+  }
+
+  .heart {
+    width: 20px; 
+    height: 20px; 
+  }
+
+  .heart::before,
+  .heart::after {
+    width: 20px; 
+    height: 20px; 
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem; 
+  }
+
+  .heart {
+    width: 15px; 
+    height: 15px;
+  }
+
+  .heart::before,
+  .heart::after {
+    width: 15px; 
+    height: 15px; 
+  }
 }
