@@ -15,12 +15,53 @@ body {
   position: relative;
 }
 
+.envelope-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.envelope {
+  font-size: 8rem;
+  transition: all 0.3s ease;
+  transform-origin: center;
+  cursor: pointer;
+}
+
+.message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: all 0.5s ease;
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  padding: 20px;
+  overflow-wrap: break-word;
+}
+
+.envelope-wrapper.open .envelope {
+  transform: scale(0);
+  opacity: 0;
+}
+
+.envelope-wrapper.open .message {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  z-index: 100;
+}
+
 h1 {
   color: #c70039;
   font-size: 3rem;
   z-index: 2;
   text-shadow: 1px 1px 2px #00000040;
   animation: pulse 2s infinite;
+  width: 100%;
+  letter-spacing: 2px;
+  display: inline-block;
+  margin: 0 auto;
 }
 
 @keyframes pulse {
@@ -62,6 +103,24 @@ h1 {
   top: 0;
 }
 
+.heart-image {
+  position: absolute;
+  width: 80px;         /* aumentado */
+  height: 80px;        /* aumentado */
+  animation: floatUp 6s linear infinite;
+  opacity: 1;          /* mais visível */
+  mask-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='black'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='black'/%3E%3C/svg%3E");
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  object-fit: cover;
+  border: 3px solid #fff;   /* borda branca para destacar */
+  box-shadow: 0 2px 12px 2px #fff8, 0 0 0 2px #c70039; /* brilho e leve contorno */
+  z-index: 2;
+}
+
 @keyframes floatUp {
   0% {
     bottom: -10%;
@@ -73,9 +132,97 @@ h1 {
   }
 }
 
+.btn-carta {
+  display: block;
+  margin: 20px auto 0 auto; /* reduzido de 40px para 20px */
+  background: none;
+  border: none;
+  font-size: 3rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  padding: 10px;
+}
+
+.btn-carta:hover {
+  transform: scale(1.2);
+  background: none;
+}
+
+.btn-heart {
+  font-size: 2rem;
+  margin-right: 0.5em;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.carta-conteudo {
+  display: none;
+  margin: 10px auto;  /* reduzido de 30px para 10px */
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  z-index: 101;
+}
+
+.carta-conteudo.aberta {
+  display: block;
+  animation: cartaFadeIn 1s;
+}
+
+.carta-conteudo p {
+  background: linear-gradient(to bottom, #fff8f8, #fff);
+  color: #c70039;
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(199, 0, 57, 0.2);
+  padding: 25px 20px; /* reduzido de 30px para 25px */
+  font-size: calc(0.9rem + 0.8vw); /* fonte um pouco menor */
+  line-height: 1.6; /* reduzido de 1.8 para 1.6 */
+  text-align: center;
+  position: relative;
+  border: 2px solid #ffd6d6;
+  margin: 5px; /* reduzido de 10px para 5px */
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.carta-conteudo p::before {
+  content: '❤️';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  background: #fff;
+  padding: 0 15px;
+}
+
+.carta-conteudo p::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 1px solid #ffccd5;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+@keyframes cartaFadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(40px) scale(0.8);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1);
+  }
+}
+
 @media (max-width: 768px) {
   h1 {
     font-size: 2.5rem; 
+    letter-spacing: 1px;
   }
 
   .heart {
@@ -93,6 +240,7 @@ h1 {
 @media (max-width: 480px) {
   h1 {
     font-size: 2rem; 
+    letter-spacing: 0.5px;
   }
 
   .heart {
