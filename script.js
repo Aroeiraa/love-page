@@ -60,6 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnCarta = document.getElementById('btn-carta');
   const cartaConteudo = document.getElementById('carta-conteudo');
   const titulo = document.querySelector('.message h1');
+  const musicaBtn = document.getElementById('musica-btn');
+  const musicaOptions = document.getElementById('musica-options');
   
   function updateTimer() {
     const startDate = new Date('2024-07-01T00:00:00').getTime(); // Start date: July 1, 2024
@@ -99,6 +101,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     cartaConteudo.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  }
+
+  if (musicaBtn && musicaOptions) {
+    musicaBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      musicaOptions.style.display = musicaOptions.style.display === 'block' ? 'none' : 'block';
+    });
+
+    document.addEventListener('click', () => {
+      musicaOptions.style.display = 'none';
+    });
+
+    musicaOptions.addEventListener('click', (e) => {
       e.stopPropagation();
     });
   }
