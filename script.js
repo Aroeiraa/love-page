@@ -61,12 +61,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const cartaConteudo = document.getElementById('carta-conteudo');
   const titulo = document.querySelector('.message h1');
   
+  function updateTimer() {
+    const startDate = new Date('2024-07-01T00:00:00').getTime(); // Start date: July 1, 2024
+    const now = new Date().getTime();
+    const diff = now - startDate;
+
+    if (diff > 0) {
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+    }
+  }
+
   if (btnCarta && cartaConteudo) {
     btnCarta.addEventListener('click', (e) => {
       e.stopPropagation();
       cartaConteudo.classList.add('aberta');
       btnCarta.style.display = 'none';
       titulo.style.display = 'none';
+      // Start the timer when the card is opened
+      updateTimer();
+      setInterval(updateTimer, 1000);
     });
 
     document.addEventListener('click', () => {

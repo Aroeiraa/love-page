@@ -157,11 +157,17 @@ h1 {
 
 .carta-conteudo {
   display: none;
-  margin: 10px auto;  /* reduzido de 30px para 10px */
-  width: 90%;
-  max-width: 400px;
+  margin: 15px auto; /* Reduced margin */
+  width: 85%; /* Reduced width */
+  max-width: 350px; /* Reduced max width */
   position: relative;
   z-index: 101;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 15px; /* Reduced padding */
+  background: #fff;
+  border-radius: 12px; /* Slightly smaller border radius */
+  box-shadow: 0 4px 20px rgba(199, 0, 57, 0.2); /* Adjusted shadow */
 }
 
 .carta-conteudo.aberta {
@@ -172,29 +178,22 @@ h1 {
 .carta-conteudo p {
   background: linear-gradient(to bottom, #fff8f8, #fff);
   color: #c70039;
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(199, 0, 57, 0.2);
-  padding: 25px 20px; /* reduzido de 30px para 25px */
-  font-size: calc(0.9rem + 0.8vw); /* fonte um pouco menor */
-  line-height: 1.6; /* reduzido de 1.8 para 1.6 */
+  border-radius: 10px; /* Reduced border radius */
+  box-shadow: none;
+  padding: 15px; /* Reduced padding */
+  font-size: calc(0.85rem + 0.6vw); /* Reduced font size */
+  line-height: 1.5; /* Adjusted line height */
   text-align: center;
   position: relative;
-  border: 2px solid #ffd6d6;
-  margin: 5px; /* reduzido de 10px para 5px */
+  border: 1px solid #ffd6d6;
+  margin: 0;
   overflow-wrap: break-word;
   word-break: break-word;
+  max-height: 60vh; /* Reduced max height */
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
-.carta-conteudo p::before {
-  content: '❤️';
-  position: absolute;
-  top: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 2rem;
-  background: #fff;
-  padding: 0 15px;
-}
 
 .carta-conteudo p::after {
   content: '';
@@ -208,49 +207,144 @@ h1 {
   pointer-events: none;
 }
 
-@keyframes cartaFadeIn {
-  from { 
-    opacity: 0; 
-    transform: translateY(40px) scale(0.8);
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0) scale(1);
-  }
+.love-timer {
+  margin: 15px auto; /* Reduced margin */
+  font-size: 0.85rem; /* Reduced font size */
+  padding: 10px; /* Reduced padding */
+  border-radius: 10px; /* Adjusted border radius */
+  border: 1px dashed #c70039;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.love-timer span {
+  font-weight: bold;
+  color: #c70039;
+  font-size: 1.1em;
+}
+
+.musica-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 12px 25px;
+  background: linear-gradient(120deg, #c70039, #ff4d6d);
+  border-radius: 25px;
+  box-shadow: 0 4px 10px rgba(199, 0, 57, 0.3);
+  transition: all 0.3s ease;
+  font-weight: bold;
+  text-align: center;
+}
+
+.musica-link:hover {
+  background: linear-gradient(120deg, #a5002e, #ff1a4d);
+  box-shadow: 0 6px 15px rgba(199, 0, 57, 0.5);
+  transform: scale(1);
 }
 
 @media (max-width: 768px) {
   h1 {
-    font-size: 2.5rem; 
+    font-size: 2.2rem;
     letter-spacing: 1px;
   }
 
-  .heart {
-    width: 20px; 
-    height: 20px; 
+  .message {
+    padding: 10px;
+    width: 95%;
+    max-width: 90%;
   }
 
-  .heart::before,
-  .heart::after {
-    width: 20px; 
-    height: 20px; 
+  .carta-conteudo {
+    width: 100%;
+    padding: 10px;
+    margin: 10px auto;
+  }
+
+  .carta-conteudo p {
+    padding: 12px;
+    font-size: calc(0.8rem + 0.5vw);
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+
+  .love-timer {
+    font-size: 0.85rem;
+    padding: 8px;
+    margin-top: 10px;
+  }
+
+  .musica-link {
+    font-size: 0.85rem;
+    padding: 8px 15px;
+    margin-top: 10px;
+  }
+
+  .envelope {
+    font-size: 6rem;
+  }
+
+  .btn-carta {
+    font-size: 2.5rem;
   }
 }
 
 @media (max-width: 480px) {
   h1 {
-    font-size: 2rem; 
+    font-size: 1.8rem;
     letter-spacing: 0.5px;
   }
 
-  .heart {
-    width: 15px; 
-    height: 15px;
+  .message {
+    padding: 8px;
+    width: 100%;
+    max-width: 95%;
   }
 
-  .heart::before,
-  .heart::after {
-    width: 15px; 
-    height: 15px; 
+  .carta-conteudo {
+    width: 100%;
+    padding: 8px;
+  }
+
+  .carta-conteudo p {
+    padding: 10px;
+    font-size: calc(0.75rem + 0.5vw);
+    max-height: 45vh;
+    overflow-y: auto;
+  }
+
+  .love-timer {
+    font-size: 0.8rem;
+    padding: 6px;
+    margin-top: 8px;
+  }
+
+  .musica-link {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    margin-top: 8px;
+  }
+
+  .envelope {
+    font-size: 5rem;
+  }
+
+  .btn-carta {
+    font-size: 2rem;
+  }
+}
+
+@media (max-height: 600px) {
+  .message {
+    transform: translate(-50%, -45%) scale(0);
+  }
+  
+  .envelope-wrapper.open .message {
+    transform: translate(-50%, -45%) scale(1);
+  }
+
+  .carta-conteudo {
+    margin: 0 auto;
   }
 }
